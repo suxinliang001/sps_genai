@@ -80,7 +80,6 @@ def main():
     Path("submission/example.png").parent.mkdir(exist_ok=True)
     raw_test = CIFAR10("data", train=False, download=False)
     raw_test[0][0].save("submission/example.png")
-    Path("submission/example_label.txt").write_text(CLASSES[raw_test[0][1]] + "\n")
     print(json.dumps(metrics, indent=2), flush=True)
 
 

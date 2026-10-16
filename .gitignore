@@ -11,3 +11,6 @@ wheels/
 data/
 .pytest_cache/
 tmp/
+
+# Original instructor handout (kept locally)
+Assignment2.pdf
