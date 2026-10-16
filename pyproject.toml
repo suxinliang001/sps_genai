@@ -1,17 +1,17 @@
 [project]
 name = "sps-genai"
 version = "0.1.0"
-description = "Add your description here"
+description = "Assignment 2: CIFAR-10 CNN classifier with FastAPI deployment"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "en-core-web-md",
     "fastapi[standard]>=0.142.2",
+    "pillow>=12.3.0",
     "spacy>=3.8.16",
+    "torch>=2.14.1",
+    "torchvision>=0.29.1",
 ]
-
-[project.scripts]
-sps-genai = "sps_genai:main"
 
 [build-system]
 requires = ["uv_build>=0.12.21,<0.13.0"]
@@ -22,3 +22,15 @@ package = false
 
 [tool.uv.sources]
 en-core-web-md = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl" }
+torch = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+torchvision = [{ index = "pytorch-cpu", marker = "sys_platform == 'linux'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]

@@ -20,10 +20,11 @@ WORKDIR /code
 COPY pyproject.toml uv.lock /code/
 
 # Install dependencies using uv
-RUN uv sync --frozen
+RUN uv sync --frozen --no-dev --no-cache
 
 # Copy the application code
 COPY ./app /code/app
+COPY ./models /code/models
 
 # Command to run the application
-CMD ["uv", "run", "fastapi", "run", "app/main.py", "--port", "80"]
+CMD ["/code/.venv/bin/fastapi", "run", "app/main.py", "--port", "80"]

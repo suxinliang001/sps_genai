@@ -1,3 +1,7 @@
 .venv
 __pycache__
 .git
+data
+.pytest_cache
+Assignment2.pdf
+tmp
