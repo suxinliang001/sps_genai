@@ -23,7 +23,7 @@ Validation:
 - Live Docker checks passed: health, /generate, /embedding, /predict, /gan/status, /gan/generate.
 - PNG response, repeated seed and invalid-input validation checked.
 - Theory output sizes and normalized values independently checked with PyTorch.
-- Seven theory solutions with calculations are included as PDF and text.
+- Seven theory solutions with calculations are included in theory_answers.txt.
 
 Serving locally: http://127.0.0.1:8003/docs
 Repository: https://github.com/suxinliang001/sps_genai

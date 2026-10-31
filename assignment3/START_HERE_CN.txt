@@ -10,7 +10,7 @@ Assignment 3 - 在 VS Code 里使用
 4. api.py：生成数字图片的接口。
 5. main.py：把新增接口加入之前的 FastAPI 应用，保留旧源文件。
 6. Dockerfile：老师可以按 README 中的命令构建、运行。
-7. theory_answers.pdf：全部 7 题的答案与推导；theory_answers.txt 是可编辑版。
+7. theory_answers.txt：全部 7 题的答案与推导。
 
 运行环境已使用项目现有的 .venv。
 VS Code 的 Python 解释器选择项目中的 .venv/bin/python。
