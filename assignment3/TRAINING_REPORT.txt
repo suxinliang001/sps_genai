@@ -1,0 +1,29 @@
+Assignment 3 - Training and deployment record
+Date: 2026-10-31
+Architecture: Assignment3.pdf page 1; assignment3-mnist-v1
+Trainable parameters: G=765,761; D=138,817
+PyTorch: 2.14.1; torchvision: 0.29.1
+Training command: ./.venv/bin/python -m assignment3.train --epochs 5 --device cpu
+Dataset: all 60,000 MNIST training images; no training-set subset
+Epochs: 5; batch size: 128; seed: 42
+Optimizer: separate Adam optimizers, lr=0.0002, betas=(0.5,0.999)
+Loss: binary cross entropy; D ends with Sigmoid
+Normalization: input pixels mapped to [-1,1]; G ends with Tanh
+Total recorded epoch time: 539.3 seconds
+Final average losses: G=1.864794; D=0.630550
+Fixed sample seed: 2026; final 8x8 grid: results/generated.png
+Visual review: recognizable digit shapes with variety; some shapes remain ambiguous.
+No FID, Inception Score or digit-classification accuracy was computed.
+
+Validation:
+- 10 tests passed across assignment3/tests and the existing tests directory.
+- Layer types, channels, kernels, strides, padding and output dimensions checked.
+- Both networks update; D running statistics remain fixed during each G update.
+- Docker image built and started; final container reports 5 epochs and 60,000 images.
+- Live Docker checks passed: health, /generate, /embedding, /predict, /gan/status, /gan/generate.
+- PNG response, repeated seed and invalid-input validation checked.
+- Theory output sizes and normalized values independently checked with PyTorch.
+- Seven theory solutions with calculations are included as PDF and text.
+
+Serving locally: http://127.0.0.1:8003/docs
+Repository: https://github.com/suxinliang001/sps_genai

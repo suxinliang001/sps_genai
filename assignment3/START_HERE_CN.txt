@@ -1,0 +1,50 @@
+Assignment 3 - 在 VS Code 里使用
+==============================
+
+在 VS Code 中打开 sps_genai 仓库，作业文件位于 assignment3 文件夹。
+
+左侧展开 assignment3：
+1. helper_lib/model.py：按 Assignment3.pdf 编写的生成器和判别器。
+2. helper_lib/trainer.py：交替训练两个网络。
+3. train.py：读取 MNIST、开始训练、逐轮保存权重和结果。
+4. api.py：生成数字图片的接口。
+5. main.py：把新增接口加入之前的 FastAPI 应用，保留旧源文件。
+6. Dockerfile：老师可以按 README 中的命令构建、运行。
+7. theory_answers.pdf：全部 7 题的答案与推导；theory_answers.txt 是可编辑版。
+
+运行环境已使用项目现有的 .venv。
+VS Code 的 Python 解释器选择项目中的 .venv/bin/python。
+下列命令都在项目根目录的 Terminal 中运行。
+
+使用已启动的 Docker 服务：
+在浏览器打开 http://127.0.0.1:8003/docs
+展开 POST /gan/generate，点击 Try it out。
+输入 {"num_samples":25,"seed":42}，再点击 Execute，即可得到 PNG 图片。
+GET /gan/status 可查看容器中模型的实际训练轮数和训练数据量。
+
+如果服务没有启动：
+docker build -f assignment3/Dockerfile -t sps-genai-assignment3 .
+docker run --rm --name sps-genai-assignment3 -p 127.0.0.1:8003:80 sps-genai-assignment3
+
+本机直接运行 API 的另一种方式（先停止占用 8003 的服务）：
+./.venv/bin/python -m uvicorn assignment3.main:app --host 127.0.0.1 --port 8003
+
+重新从头训练：
+./.venv/bin/python -m assignment3.train --epochs 20 --device cpu
+
+训练文件：
+models/gan.pt：模型权重，重新训练会覆盖此文件。
+results/epoch_*.png：同一组随机噪声在不同轮数的结果。
+results/generated.png：最终生成结果。
+results/losses.csv：训练日志。
+TRAINING_REPORT.txt：这次训练和部署检查的实际记录。
+
+检查代码：
+./.venv/bin/python -m pytest assignment3/tests tests -q
+
+正式作业采用 28x28 的 MNIST 卷积 GAN；不需要照搬课堂 CelebA WGAN。
+当前采用 Sigmoid + BCELoss；Adam 等未在题目指定的参数已在 README 中说明。
+修改网络结构后需重新训练。重新训练后，API 和 Docker 镜像也要重新加载权重。
+
+GitHub 仓库：https://github.com/suxinliang001/sps_genai
+CourseWorks 提交时上传完整作业包和理论答案。
