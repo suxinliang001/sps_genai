@@ -8,8 +8,10 @@ from fastapi import FastAPI, HTTPException, UploadFile, File
 from pydantic import BaseModel
 from app.bigram_model import BigramModel
 from app.cnn import CIFAR10CNN, CLASSES, image_transform
+from app.image_generation import router as image_generation_router
 
 app = FastAPI()
+app.include_router(image_generation_router)
 
 MODEL_PATH = Path(__file__).resolve().parents[1] / "models" / "cifar10_cnn.pt"
 classifier = None
